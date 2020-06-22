@@ -35,7 +35,7 @@ class ResourceParser(Parser):
 class MarkdownParser(Parser):
     extensions = [".md", ".markdown"]
     
-    def parse(self, path: Path, source: Path, dest: Path):
+    def parse(self, path, source, dest):
         content = Content.load(self.read(path))
         html = markdown(content.body)
         self.write(path, dest, html)
@@ -45,7 +45,7 @@ class MarkdownParser(Parser):
 class ReStructuredTextParser(Parser):
     extensions = [".rst"]
     
-    def parse(self, path: Path, source: Path, dest: Path):
+    def parse(self, path, source, dest):
         content = Content.load(self.read(path))
         html = publish_parts(content.body, writer_name="html5")
         self.write(path, dest, html)
